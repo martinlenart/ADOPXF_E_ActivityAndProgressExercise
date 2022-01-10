@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:ActivityAndProgress.Models"
+             x:Class="ActivityAndProgress.Views.PrimesPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label BindingContext="{x:Static models:PrimeBatch.BatchSize}" 
+                       Text ="{Binding Path=., StringFormat='Number of {0:N0} batches:'}" 
+                       VerticalOptions="CenterAndExpand" HorizontalOptions="Center" />
+                <Entry x:Name="enNrBatches" Placeholder="" HorizontalOptions="Start" />
+                <Button Text="Get primes" Clicked="Button_Clicked" HorizontalOptions="Start" />
+            </StackLayout>
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                <ActivityIndicator x:Name="activityIndicator" Color="Red"
+                               VerticalOptions="CenterAndExpand" HorizontalOptions="Fill" IsVisible="False" Scale="2"/>
+                <ProgressBar x:Name="progressBar" WidthRequest="500" ProgressColor="Orange" 
+                         VerticalOptions="CenterAndExpand" HorizontalOptions="Fill" IsVisible="False" Scale="2" />
+                <StackLayout>
+                <ListView x:Name="lvPrimes" ItemTapped="lvPrimes_ItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                                <TextCell Text="{Binding .}" Detail="  " />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
